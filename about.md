@@ -1,10 +1,10 @@
 ---
 layout: page
-title: About
+title: 소개
 ---
 
-Hello.
+**기계공학**을 주 전공으로 공부를 시작하였으며 현재 **소프트웨어**를 복수 전공하고있습니다.
 
-This will be your About page. Anything about you, it should be written here in details. You may describe your bio here like who you are, what you do, your intention, social site hyperlinks and how people can contact you, etc.
+개인적으로 공부한것들과 배운것들을 포스팅하기 위한 블로그이며 가끔 사담을 적을 예정입니다.
 
 **Less is more..**
