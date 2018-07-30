@@ -134,5 +134,7 @@ ___
 
 ![Minion](http://octodex.github.com/images/minion.png)
 
+<div class="divider"></div>
+
 [^1]: Footnote number one yeah baby! Long sentence test of footnote to see how the words are wrapping between each other. Might overflowww!
 [^2]: A footnote you can link to - [click here!](#)
