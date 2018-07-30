@@ -26,3 +26,8 @@ layout: default
     <a class="prev" href="{{ page.previous.url | prepend: site.baseurl | prepend: site.url }}" title="PREV: {{page.previous.title}}">&gt;&gt;</a>
   {% endif %}
 </div>
+
+<div class="fb-comments" 
+     data-href={{ site.url | append: page.url }}
+     width="100%" 
+     data-numposts="5" ></div>
