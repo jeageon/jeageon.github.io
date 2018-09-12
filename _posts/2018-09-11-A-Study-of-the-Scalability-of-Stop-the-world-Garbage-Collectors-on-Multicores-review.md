@@ -80,7 +80,7 @@ mutator들의 각각의 할당으로부터 동기화를 피하기위해 각 muta
 eden 공간에 존재하는 커다란 메모리 덩어리 부분에 한다. 그 후 동기화하지 않고 **TLAB**로 부터 bump pointer를 사용하여 오브젝트를 할당한다. 
 비슷하게 늙은 세대로 복사하는 과정에서도 **PLAB**(Promotion-Local Allocation Buffer)를 이용하여 할당한다.
 
-### Young gengeration collection
+#### Young gengeration collection
 
 젋은 세대의 collection은 현재 **TLAB**의 공간이 부족하고 eden 공간으로부터 새로운 **TLAB**를 할당받는것에 실패 했을 때 시작된다. 
 이 때 eden 공간에는 가장 최근에 할당된 오브젝트들이 존재하며 from-공간에는 이전 collect로부터 살아남은 오브젝트들이 존재하고, to-공간은 비어있다. 
