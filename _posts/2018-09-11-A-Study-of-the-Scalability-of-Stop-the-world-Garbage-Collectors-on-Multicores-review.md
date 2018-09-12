@@ -46,7 +46,6 @@ GC는 크게 두가지로 분류되는데, collecting을 하기위해 모든 app
 알려진 문제를 해결하기에 충분하다는 것을 보여준다.
 
 해당 논문은 자신들의 벤치마크 측정결과를 바탕으로 **NAPS** GC의 구현 결과를 다음과 같이 정리하였다.
-
 1. **NAPS**는 많은 코어에서도 잘 scale함을 확인하였다. 많은 메모리를 요구하는 application에 대해, 일정한 힙(heap) 사이즈에서, 
 하드웨어의 코어가 증가함에 따라 **NAPS**의 collection 시간이 감소하였다. **Parallel Scavenge**와 비교하여 **NAPS**는 모든 경우에서 더 
 높은 성능을 보여준다.
@@ -89,6 +88,5 @@ collector는 eden 공간에 존재하는 살아있는 오브젝트들을 to-공�
 이 후에는 eden 공간과 from-공간에는 죽은 오브젝트들만 존재하므로 그냥 빈 공간으로 취급하며 from-공간과 to-공간을 서로 교체해주므로써 collection을 마친다.
 
 **Parallel Scavenge**는 몇 개의 phase로 구성된다.
-
 1.  mutators들은 **stop-the-world** 벽을 만나 모두 멈추게된다.(initialisation phase) 
 initialisation phase동안은 VM thread라고 불리는 단 한개의 thread가 parallel phase에서 GC thread들이 수행해야 할 GC task들을 준비한다. 
