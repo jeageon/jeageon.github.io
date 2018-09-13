@@ -80,13 +80,33 @@ mutator들의 각각의 할당으로부터 동기화를 피하기위해 각 muta
 eden 공간에 존재하는 커다란 메모리 덩어리 부분에 한다. 그 후 동기화하지 않고 **TLAB**로 부터 bump pointer를 사용하여 오브젝트를 할당한다. 
 비슷하게 늙은 세대로 복사하는 과정에서도 **PLAB**(Promotion-Local Allocation Buffer)를 이용하여 할당한다.
 
-#### Young gengeration collection
+### 2.3 Young gengeration collection
 
 젋은 세대의 collection은 현재 **TLAB**의 공간이 부족하고 eden 공간으로부터 새로운 **TLAB**를 할당받는것에 실패 했을 때 시작된다. 
 이 때 eden 공간에는 가장 최근에 할당된 오브젝트들이 존재하며 from-공간에는 이전 collect로부터 살아남은 오브젝트들이 존재하고, to-공간은 비어있다. 
 collector는 eden 공간에 존재하는 살아있는 오브젝트들을 to-공간으로 옮기고 from-공간에 존재하는 살아있는 오브젝트들을 늙은 세대의 영역으로 옮긴다. 
 이 후에는 eden 공간과 from-공간에는 죽은 오브젝트들만 존재하므로 그냥 빈 공간으로 취급하며 from-공간과 to-공간을 서로 교체해주므로써 collection을 마친다.
 
-**Parallel Scavenge**는 몇 개의 phase로 구성된다.
-1.  mutators들은 **stop-the-world** 벽을 만나 모두 멈추게된다.(initialisation phase) 
-initialisation phase동안은 VM thread라고 불리는 단 한개의 thread가 parallel phase에서 GC thread들이 수행해야 할 GC task들을 준비한다. 
+**Parallel Scavenge**는 몇 개의 phase로 구성된다. 첫번째로, mutators들은 **stop-the-world** 벽을 만나 모두 멈추게된다.(initialisation phase) 
+initialisation phase동안은 VM thread라고 불리는 단 한개의 thread가 parallel phase에서 GC thread들이 수행해야 할 GC task들을 준비한다. Termination Protocol은 parallrl phase에 끝나야 할 모든 GC thread들을 감지하고 해당 phase가 끝나면 GC thread들을 멈춘 후 다시 VM thread를 
+깨운다. 마지막 phase에서는, VM thread는 힙 사이즈를 재조정하고 mutator들을 깨운다.
+
+#### 2.3.1 Synchronisation mechanism
+
+**Parallel Scavenge**는 thread들 사이의 동기화를 위햇 모니터들을 사용한다. 이 모니터안에는 thread들을 중지시키거나 깨우기위한 상태 변수와 
+공유데이터에 동시 접근을 막기위한 lock으로 구성되어있다. 더 나아가 모니터 안의 이 상태 변수들은 공유 변수이므로 associated lock에 의해 보호되어진다. 
+
+**Parallel Scavenge**는 다음 두개의 모니터 쌍을 가지고 있다.
+1. **stop-the-world pair**
+2. **parallel pair**
+
+**stop-the-world pair**는 collection을 시작할 때 mutator들을 중지시키고 VM thread를 깨운다. (끝날 때는 반대로) 
+mutator를 동기화 시키기위한 App 모니터와 VM thread를 동기화시키기위한 Init 모니터로 구성된다. 
+**parallel pair**는 parallel phase가 시작될 때 VM thread를 멈추고 GC thread들을 깨우며, VM 모니터와 GC 모니터를 가지고 동기화 작업을 진행한다. 
+
+#### 2.3.2 Initialisation phase
+
+**Parallel Scavenge**는 **stop-the-world** collector이기 때문에 collection의 시작점에서 모든 mutator들을 멈춰야 하고 
+**stop-the-world** 모니터에서는 당연히 멈춘 mutator들의 수를 세고있어야 한다. 모든 mutator들의 멈춤과 동시에 VM thread는 GC 작업 큐를 초기화시키고 
+GC 모니터에 대기하고있는 CG thread들을 모두 깨운 후 자기 자신은 VM 모니터에 대기할 수 있도록한다. (멈춘다)
+
