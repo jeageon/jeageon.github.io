@@ -1,4 +1,7 @@
-## [라인플러스] 2018년 SW개발 동계 인턴 코딩테스트(?) 후기
+---
+title: 라인플러스 2018년 SW개발 동계 인턴 코딩테스트(?) 후기
+updated: 2018-09-29 16:38
+---
 
 ![img_01](https://raw.githubusercontent.com/jeageon/jeageon.github.io/master/_images/img_01.PNG)
 
