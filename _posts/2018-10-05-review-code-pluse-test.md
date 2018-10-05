@@ -1,5 +1,5 @@
 ---
-title: 디지털 과거 Code+ 예선 
+title: 디지털 과거 Code+ 예선 후기
 updated: 2018-10-05 20:30
 ---
 
