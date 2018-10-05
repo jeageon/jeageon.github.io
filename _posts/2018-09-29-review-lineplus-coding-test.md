@@ -41,9 +41,9 @@ updated: 2018-09-29 16:38
 
 <div class="divider"></div>
 
-> 2018.10.15 update
+`2018.10.15 update`
 
-![img_02](../_images/img_02.png)
+![img_02](https://raw.githubusercontent.com/jeageon/jeageon.github.io/master/_images/img_02.PNG)
 
 필기테스트는 당연히 떨어질줄 알았는데 붙었습니다ㅠㅠㅠㅠ
 
