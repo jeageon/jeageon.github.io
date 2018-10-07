@@ -41,7 +41,7 @@ updated: 2018-09-29 16:38
 
 <div class="divider"></div>
 
-`2018.10.15 update`
+`2018.10.05 update`
 
 ![img_02](https://raw.githubusercontent.com/jeageon/jeageon.github.io/master/_images/img_02.PNG)
 
