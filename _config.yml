@@ -1,11 +1,11 @@
 # Site Info
-title:              "JeaGeon's Blog"
+title:              "JaeGeon's Blog"
 description:        "Personal posting space"
-author_name:        "JeaGeon Oh" # change this to your name
+author_name:        "JaeGeon Oh" # change this to your name
 logo_url:           https://avatars2.githubusercontent.com/u/41815516?v=4 # Get it from GitHub API: https://api.github.com/users/<username>
 
 # Site Settings
-url:                https://jeageon.github.io # main url
+url:                https://zezaeoh.github.io # main url
 baseurl:            /
 permalink:          /:title # Post permalink
 timezone:           Asia/Seoul # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
